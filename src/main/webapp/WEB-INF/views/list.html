@@ -15,6 +15,11 @@
 <!--<h1>Hello C1220G1! We will be the developers of the future! </h1>-->
 <!--<h1 th:utext="${name}"></h1>-->
 <a href="/create">Create Customer</a>
+
+<form action="/list" method="get">
+    <input type="text"  th:field="${search}">
+    <button type="submit">Search</button>
+</form>
 <table border="1">
     <tr>
         <th>STT</th>
@@ -25,7 +30,7 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <tr th:each="customer:${customers}">
+    <tr th:each="customer:${customers.content}">
         <td th:utext="${customer.getId()}"></td>
         <td th:utext="${customer.getName()}"></td>
         <td th:utext="${customer.getAddress()}"></td>
@@ -34,6 +39,16 @@
         <td><a th:href="@{/edit/{id}(id=${customer.getId()})}">Edit</a></td>
         <td><a th:href="@{/delete/{id}(id=${customer.getId()})}">Delete</a> </td>
     </tr>
+
+<!--    <div aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:if="${customers.hasPrevious()}"><a class="page-link" th:href="@{/list(page=${customers.getNumber() - 1}, size=${customers.getSize()}, sort=${customers.getSort()}, search=${search})}">Previous</a></li>-->
+<!--            <li class="page-item" th:each="page, cuong : ${#numbers.sequence(1, customers.getTotalPages())}"><a class="page-link" th:href="@{/list(page=${cuong.index})}" th:text="${cuong.count}">1</a></li>-->
+
+<!--            <li class="page-item" th:if="${customers.hasNext()}"><a class="page-link" th:href="@{/list(page=${customers.getNumber() + 1}, size=${customers.getSize()}, sort=${customers.getSort()}, search=${search})}">Next</a></li>-->
+<!--            <li class="page-item" th:unless="${customers.hasNext()}"><a class="page-link" th:disabled="${true}">Next</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
 
 </table>
 </body>
